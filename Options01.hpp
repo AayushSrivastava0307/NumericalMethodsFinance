@@ -1,5 +1,5 @@
-#ifndef Options01_h
-#define Options01_h
+#ifndef Options01_hpp
+#define Options01_hpp
 // inputting and displaying option data
 int GetInputData(int &N, double &K);
 // pricing European option

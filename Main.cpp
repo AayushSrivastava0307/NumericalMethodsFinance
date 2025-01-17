@@ -1,4 +1,6 @@
+
 #include "BinModel01.hpp"
+#include "Options03.hpp"
 #include <iostream>
 #include <cmath>
 using namespace std;
@@ -7,13 +9,19 @@ int main()
     double S0, U, D, R;
     if (GetInputData(S0, U, D, R) == 1)
         return 1;
-    // compute risk-neutral probability
-    cout << "q = " << RiskNeutProb(U, D, R) << endl;
-    // compute stock price at node n=3,i=2
-    int n = 3;
-    int i = 2;
-    cout << "n = " << n << endl;
-    cout << "i = " << i << endl;
-    cout << "S(n,i) = " << S(S0, U, D, n, i) << endl;
+    double K; // strike price
+    int N;    // steps to expiry
+    cout << "Enter call option data:" << endl;
+    GetInputData(N, K);
+    cout << "European call option price = "
+         << PriceByCRR(S0, U, D, R, N, K, CallPayoff) 
+         << endl
+         << endl;
+    cout << "Enter put option data:" << endl;
+    GetInputData(N, K);
+    cout << "European put option price = "
+         << PriceByCRR(S0, U, D, R, N, K, PutPayoff) 
+         << endl
+         << endl;
     return 0;
 }
