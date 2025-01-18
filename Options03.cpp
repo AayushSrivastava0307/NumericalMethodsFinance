@@ -30,8 +30,8 @@ int GetInputData(int &N, double K[])
 
 // Pricing European option with updated Payoff function pointer
 double PriceByCRR(double S0, double U, double D,
-                 double R, int N, double K[],
-                 double (*Payoff)(double z, double K[]))
+                  double R, int N, double K[],
+                  double (*Payoff)(double z, double K[]))
 {
     double q = RiskNeutProb(U, D, R);
     double Price[N + 1];
