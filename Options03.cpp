@@ -4,6 +4,7 @@
 #include <cmath>
 using namespace std;
 
+// Inputting and displaying option data for single strike
 int GetInputData(int &N, double &K)
 {
     cout << "Enter steps to expiry N: ";
@@ -14,9 +15,23 @@ int GetInputData(int &N, double &K)
     return 0;
 }
 
+// Overloaded input for multiple strikes (for Double-Digital Options)
+int GetInputData(int &N, double K[])
+{
+    cout << "Enter steps to expiry N: ";
+    cin >> N;
+    cout << "Enter first strike price K1: ";
+    cin >> K[0];
+    cout << "Enter second strike price K2: ";
+    cin >> K[1];
+    cout << endl;
+    return 0;
+}
+
+// Pricing European option with updated Payoff function pointer
 double PriceByCRR(double S0, double U, double D,
-                 double R, int N, double K,
-                 double (*Payoff)(double z, double K))
+                 double R, int N, double K[],
+                 double (*Payoff)(double z, double K[]))
 {
     double q = RiskNeutProb(U, D, R);
     double Price[N + 1];
@@ -34,32 +49,47 @@ double PriceByCRR(double S0, double U, double D,
     return Price[0];
 }
 
-double CallPayoff(double z, double K)
+// Call Payoff
+double CallPayoff(double z, double K[])
 {
-    if (z > K)
-        return z - K;
+    // K[0] is the strike price
+    if (z > K[0])
+        return z - K[0];
     return 0.0;
 }
 
-double PutPayoff(double z, double K)
+// Put Payoff
+double PutPayoff(double z, double K[])
 {
-    if (z < K)
-        return K - z;
+    // K[0] is the strike price
+    if (z < K[0])
+        return K[0] - z;
     return 0.0;
 }
 
-// Implementation of Digital Call Payoff
-double DigitalCallPayoff(double z, double K)
+// Digital Call Payoff
+double DigitalCallPayoff(double z, double K[])
 {
-    if (z > K)
+    // K[0] is the strike price
+    if (z > K[0])
         return 1.0;
     return 0.0;
 }
 
-// Implementation of Digital Put Payoff
-double DigitalPutPayoff(double z, double K)
+// Digital Put Payoff
+double DigitalPutPayoff(double z, double K[])
 {
-    if (z < K)
+    // K[0] is the strike price
+    if (z < K[0])
+        return 1.0;
+    return 0.0;
+}
+
+// Double Digital Option Payoff
+double DoubleDigitalPayoff(double z, double K[])
+{
+    // K[0] = K1, K[1] = K2
+    if (z > K[0] && z < K[1])
         return 1.0;
     return 0.0;
 }
