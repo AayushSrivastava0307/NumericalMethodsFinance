@@ -1,3 +1,4 @@
+#pragma once
 #ifndef BinModel01_hpp
 #define BinModel01_hpp
 // computing risk-neutral probability

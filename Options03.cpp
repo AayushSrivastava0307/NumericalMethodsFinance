@@ -47,3 +47,19 @@ double PutPayoff(double z, double K)
         return K - z;
     return 0.0;
 }
+
+// Implementation of Digital Call Payoff
+double DigitalCallPayoff(double z, double K)
+{
+    if (z > K)
+        return 1.0;
+    return 0.0;
+}
+
+// Implementation of Digital Put Payoff
+double DigitalPutPayoff(double z, double K)
+{
+    if (z < K)
+        return 1.0;
+    return 0.0;
+}

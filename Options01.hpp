@@ -1,3 +1,4 @@
+#pragma once
 #ifndef Options01_hpp
 #define Options01_hpp
 // inputting and displaying option data
