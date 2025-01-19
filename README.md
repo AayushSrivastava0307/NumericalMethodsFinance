@@ -19,7 +19,7 @@ To successfully compile and run the Binomial European Model:
    cd NumericalMethodsFinance
 2. Compile the Files
    ```bash
-    g++ MainEuropean.cpp BinModelEuropean.cpp OptionsEuropean.cpp Call.cpp Put.cpp Strangle.cpp Butterfly.cpp BullSpread.cpp BearSpread.cpp DoubleDigitOpt.cpp -o MainEuropean.exe
+    g++ .\MainEuropean.cpp .\BinModelEuropean.cpp .\OptionsEuropean.cpp .\BearSpread.cpp .\BullSpread.cpp .\DoubleDigitOpt.cpp .\Butterfly.cpp .\Strangle.cpp -o MainEuropean
 3. Run the executable
    ```bash
    ./MainEuropean.exe
