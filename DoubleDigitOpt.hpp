@@ -1,6 +1,6 @@
 #ifndef DoubDigitOpt_hpp
 #define DoubDigitOpt_hpp
-#include "Options06.hpp"
+#include "OptionsEuropean.hpp"
 class DoubDigitOpt : public EurOption
 {
 private:
