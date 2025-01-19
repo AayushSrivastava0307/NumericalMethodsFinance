@@ -1,6 +1,6 @@
 #ifndef OptionsEuropean_hpp
 #define OptionsEuropean_hpp
-#include "BinModel02.hpp"
+#include "BinModelEuropean.hpp"
 class EurOption
 {
 private:

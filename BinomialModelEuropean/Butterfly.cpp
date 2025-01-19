@@ -1,10 +1,10 @@
-// Butterfly.cpp
+
 #include "Butterfly.hpp"
 #include <iostream>
 
 using namespace std;
 
-// Override the Payoff function
+// override the Payoff function
 double Butterfly::Payoff(double z)
 {
     double midpoint = (K1 + K2) / 2.0;
@@ -17,7 +17,7 @@ double Butterfly::Payoff(double z)
         return 0.0;
 }
 
-// Butterfly::GetInputData Implementation
+
 int Butterfly::GetInputData()
 {
     cout << "Enter Butterfly Spread option data:" << endl;
