@@ -1,0 +1,43 @@
+#ifndef Options08_hpp
+#define Options08_hpp
+#include "BinModel02.hpp"
+class Option
+{
+private:
+    int N; // steps to expiry
+public:
+    void SetN(int N_) { N = N_; }
+    int GetN() { return N; }
+    virtual double Payoff(double z) = 0;
+};
+class EurOption : public virtual Option
+{
+public:
+    // pricing European option
+    double PriceByCRR(BinModel Model);
+};
+class AmOption : public virtual Option
+{
+public:
+    // pricing American option
+    double PriceBySnell(BinModel Model);
+};
+class Call : public EurOption, public AmOption
+{
+private:
+    double K; // strike price
+public:
+    void SetK(double K_) { K = K_; }
+    int GetInputData();
+    double Payoff(double z);
+};
+class Put : public EurOption, public AmOption
+{
+private:
+    double K; // strike price
+public:
+    void SetK(double K_) { K = K_; }
+    int GetInputData();
+    double Payoff(double z);
+};
+#endif
