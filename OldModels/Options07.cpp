@@ -72,6 +72,7 @@ int Put::GetInputData()
     cout << "Enter strike price K:";
     cin >> K;
     cout << endl;
+    return 0;
 }
 double Put::Payoff(double z)
 {
