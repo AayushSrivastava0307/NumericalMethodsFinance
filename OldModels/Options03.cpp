@@ -4,7 +4,7 @@
 #include <cmath>
 using namespace std;
 
-// Inputting and displaying option data for single strike
+// inputting and displaying option data for single strike
 int GetInputData(int &N, double &K)
 {
     cout << "Enter steps to expiry N: ";
@@ -15,7 +15,7 @@ int GetInputData(int &N, double &K)
     return 0;
 }
 
-// Overloaded input for multiple strikes (for Double-Digital Options)
+// overloading for multiple strikes
 int GetInputData(int &N, double K[])
 {
     cout << "Enter steps to expiry N: ";
@@ -28,7 +28,7 @@ int GetInputData(int &N, double K[])
     return 0;
 }
 
-// Pricing European option with updated Payoff function pointer
+// payoff function pointer 
 double PriceByCRR(double S0, double U, double D,
                   double R, int N, double K[],
                   double (*Payoff)(double z, double K[]))
@@ -49,25 +49,23 @@ double PriceByCRR(double S0, double U, double D,
     return Price[0];
 }
 
-// Call Payoff
 double CallPayoff(double z, double K[])
 {
-    // K[0] is the strike price
+    // K[0] is strike price
     if (z > K[0])
         return z - K[0];
     return 0.0;
 }
 
-// Put Payoff
+
 double PutPayoff(double z, double K[])
 {
-    // K[0] is the strike price
+    // K[0] is strike price
     if (z < K[0])
         return K[0] - z;
     return 0.0;
 }
 
-// Digital Call Payoff
 double DigitalCallPayoff(double z, double K[])
 {
     // K[0] is the strike price
@@ -76,7 +74,6 @@ double DigitalCallPayoff(double z, double K[])
     return 0.0;
 }
 
-// Digital Put Payoff
 double DigitalPutPayoff(double z, double K[])
 {
     // K[0] is the strike price
@@ -85,7 +82,7 @@ double DigitalPutPayoff(double z, double K[])
     return 0.0;
 }
 
-// Double Digital Option Payoff
+// here use of K[0] will make sense 
 double DoubleDigitalPayoff(double z, double K[])
 {
     // K[0] = K1, K[1] = K2

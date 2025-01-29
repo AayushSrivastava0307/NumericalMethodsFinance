@@ -10,18 +10,16 @@ int main()
     using namespace std;
     using namespace std::chrono;
 
-    // Hardcoded binomial model data:
-    // S0 = 100, U = 0.1, D = -0.1, R = 0.05
-    // This code sets up the model with the same data each time.
+    // hardcoded binomial model data:
+    // s0 = 100, u = 0.1, d = -0.1, r = 0.06
     {
-        // Fake input for BinModel::GetInputData()
+        // fake input for binmodel::getinputdata()
         istringstream binModelInput("100\n0.1\n-0.1\n0.06\n");
 
         // temporarily redirect cin
         streambuf* backupCin = cin.rdbuf();
         cin.rdbuf(binModelInput.rdbuf());
 
-        // Create binomial model
         BinModel Model;
         if (Model.GetInputData() == 1)
         {
@@ -29,47 +27,53 @@ int main()
             return 1;
         }
 
-        // Restore cin
+        // restore cin
         cin.rdbuf(backupCin);
 
-        // We'll test an American Call for varying N
-        // We'll keep strike = 100
-        vector<int> testNs = {3, 50, 100, 1000, 5000};
+        // we'll test an american call and a european call for varying n
+        // we'll keep strike = 100
+        vector<int> testNs = {3, 50, 100, 1000, 5000,20000};
 
-        cout << "Hardcoded American Call with S0=100, U=0.1, D=-0.1, R=0.05\n"
-             << "Strike K=100. Timing results:\n\n";
+        cout << "hardcoded calls with s0=100, u=0.1, d=-0.1, r=0.06\n"
+             << "strike k=100. timing results:\n\n";
 
         for (int n : testNs)
         {
-            // Fake input for Call::GetInputData() for each N
-            //  (N, then strike K=100)
+            // fake data for call::getinputdata() (n, then strike=100)
             ostringstream oss;
             oss << n << "\n100\n";
             istringstream callInput(oss.str());
 
-            // Redirect cin again
+            // redirect cin again
             backupCin = cin.rdbuf();
             cin.rdbuf(callInput.rdbuf());
 
             Call OptionCall;
             OptionCall.GetInputData();
 
-            // Restore cin
+            // restore cin
             cin.rdbuf(backupCin);
 
-            // Measure runtime of PriceBySnell (American)
-            auto startTime = high_resolution_clock::now();
+            // measure runtime for european call
+            auto startTimeEu = high_resolution_clock::now();
+            double euCallPrice = OptionCall.PriceByCRR(Model);
+            auto endTimeEu = high_resolution_clock::now();
+            auto durationMsEu = duration_cast<milliseconds>(endTimeEu - startTimeEu).count();
+
+            cout << "n=" << n
+                 << ", runtime: " << durationMsEu << " ms\n";
+
+            // measure runtime for american call
+            auto startTimeAm = high_resolution_clock::now();
             double amCallPrice = OptionCall.PriceBySnell(Model);
-            auto endTime = high_resolution_clock::now();
+            auto endTimeAm = high_resolution_clock::now();
+            auto durationMsAm = duration_cast<milliseconds>(endTimeAm - startTimeAm).count();
 
-            auto durationMs = duration_cast<milliseconds>(endTime - startTime).count();
-
-            // Print result for this N
-            cout << "N=" << n << " -> American Call Price: " << amCallPrice
-                 << ", Runtime: " << durationMs << " ms\n";
+            cout << "n=" << n
+                 << ", runtime: " << durationMsAm << " ms\n\n";
         }
 
-        cout << "\nDone.\n";
+        cout << "\ndone.\n";
     }
 
     return 0;

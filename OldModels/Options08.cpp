@@ -38,8 +38,7 @@ double AmOption::PriceBySnell(BinModel Model)
         {
             ContVal = (q * Price[i + 1] + (1 - q) * Price[i]) / (1 + Model.GetR());
             Price[i] = Payoff(Model.S(n, i));
-            if (ContVal > Price[i])
-                Price[i] = ContVal;
+            Price[i] = max(Price[i], ContVal);
         }
     }
     return Price[0];
