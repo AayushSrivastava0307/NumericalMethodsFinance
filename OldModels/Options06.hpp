@@ -7,10 +7,10 @@ private:
     int N; // steps to expiry
 public:
     void SetN(int N_) { N = N_; }
-    // Payoff defined to return 0.0
-    // for pedagogical purposes.
+    // payoff defined to return 0.0
+    // for pedagogical purposes no other reason
     // To use a pure virtual function replace by
-    // virtual double Payoff(double z)=0; 9
+    // virtual double Payoff(double z)=0; 
     virtual double Payoff(double z) { return 0.0; }
     // pricing European option
     double PriceByCRR(BinModel Model);

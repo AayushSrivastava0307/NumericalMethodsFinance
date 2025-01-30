@@ -9,10 +9,9 @@ int main()
     double S0, U, D, R;
     if (GetInputData(S0, U, D, R) == 1)
         return 1;
-    double K_single; // strike price for Call, Put, Digital Call, Digital Put
+    double K_single; //  single strike price for call put and digital ones;
     int N;    // steps to expiry
 
-    // Pricing Call Option
     cout << "Enter call option data:" << endl;
     GetInputData(N, K_single);
     double K_call[1] = { K_single };
@@ -21,7 +20,6 @@ int main()
          << endl
          << endl;
 
-    // Pricing Put Option
     cout << "Enter put option data:" << endl;
     GetInputData(N, K_single);
     double K_put[1] = { K_single };
@@ -30,7 +28,7 @@ int main()
          << endl
          << endl;
 
-    // Pricing Digital Call Option
+
     cout << "Enter digital call option data:" << endl;
     GetInputData(N, K_single);
     double K_digitalCall[1] = { K_single };
@@ -39,7 +37,7 @@ int main()
          << endl
          << endl;
 
-    // Pricing Digital Put Option
+
     cout << "Enter digital put option data:" << endl;
     GetInputData(N, K_single);
     double K_digitalPut[1] = { K_single };
@@ -48,10 +46,9 @@ int main()
          << endl
          << endl;
 
-    // Pricing Double Digital Option
     cout << "Enter double digital option data:" << endl;
     double K_double[2];
-    GetInputData(N, K_double); // Uses overloaded function
+    GetInputData(N, K_double); // fxn overloading
     cout << "European double digital option price = "
          << PriceByCRR(S0, U, D, R, N, K_double, DoubleDigitalPayoff) 
          << endl

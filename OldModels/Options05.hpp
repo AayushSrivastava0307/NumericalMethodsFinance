@@ -15,7 +15,7 @@ public:
     {
         Payoff = Payoff_;
     }
-    // pricing European option
+    // pricing european option
     double PriceByCRR(BinModel Model, double K);
 };
 // computing call payoff
@@ -25,7 +25,7 @@ class Call : public EurOption //subclass
 private:
     double K; // strike price
 public:
-    Call() { SetPayoff(CallPayoff); }
+    Call() { SetPayoff(CallPayoff); } //constructor
     double GetK() { return K; }
     int GetInputData();
 };
@@ -36,7 +36,7 @@ class Put : public EurOption
 private:
     double K; // strike price
 public:
-    Put() { SetPayoff(PutPayoff); }
+    Put() { SetPayoff(PutPayoff); } //constructor
     double GetK() { return K; }
     int GetInputData();
 };
